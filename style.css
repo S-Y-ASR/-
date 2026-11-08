@@ -527,7 +527,7 @@ body {
   /* 命盤のサイズを確保 */
   .result-grid {
     width: 650px;
-    height: 900px;
+    height: 1200px;
     max-width: none;
 
     grid-template-columns: repeat(4, minmax(0, 1fr));
