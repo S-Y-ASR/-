@@ -514,82 +514,40 @@ body {
 }
 
 /* ===== レスポンシブ ===== */
-/* ===== スマホ表示 ===== */
-/* ===== スマホ表示 ===== */
+/* ===== スマホ版のみ ===== */
 @media screen and (max-width: 768px) {
 
-  .hero {
-    gap: 2.5rem;
-    padding: 5rem 1rem 3rem;
-  }
-
-  .container {
-    padding: 0 8px;
-  }
-
+  /* 命盤を横スクロール可能にする */
   .result {
     padding: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
-  /* 命盤全体 */
+  /* 命盤のサイズを確保 */
   .result-grid {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
+    width: 650px;
+    height: 650px;
+    max-width: none;
 
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(4, minmax(0, 1fr));
   }
 
-  /* 各宮 */
+  /* 各宮の文字 */
   .palace-cell {
     min-width: 0;
     min-height: 0;
-    padding: 2px 1px;
-    font-size: 8px;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-  }
-
-  /* 宮名 */
-  .twelve-palace {
-    font-size: 10px;
-    margin-bottom: 3px;
-  }
-
-  /* 主星 */
-  .main-stars {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-
-  /* 各種補助星 */
-  .year-stem-stars,
-  .year-branch-stars,
-  .month-stars,
-  .hour-stars,
-  .fire-bell-stars,
-  .day-stars,
-  .doctor-stars {
-    font-size: 8px;
-    line-height: 1.2;
-    margin-top: 2px;
-  }
-
-  /* 大限 */
-  .da-limit {
-    font-size: 8px;
-    margin-top: 3px;
-  }
-
-  /* 中央部分 */
-  .calculation-center {
-    padding: 3px;
-    font-size: 9px;
+    padding: 8px 4px;
     line-height: 1.4;
   }
+
+  /* 中央の出生情報 */
+  .calculation-center {
+    padding: 10px;
+  }
 }
+
 
 .ming-palace {
   background-color: #fff3f7;
