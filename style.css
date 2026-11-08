@@ -379,10 +379,11 @@ body {
   height: 1200px;
   max-width: 100%;
 
+  aspect-ratio: 1 / 1;
+
   margin: 0 auto;
   position: relative;
 }
-
 /*
 .palace-cell {
   background: var(--bg3);
@@ -513,10 +514,62 @@ body {
 }
 
 /* ===== レスポンシブ ===== */
+/* ===== スマホ表示 ===== */
 @media (max-width: 640px) {
-  .hero { gap: 2.5rem; padding: 5rem 1.5rem 3rem; }
-  .mandala-wrap { width: 220px; }
-  .result-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .hero {
+    gap: 2.5rem;
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .mandala-wrap {
+    width: 220px;
+  }
+
+  /* 命盤 */
+  .result {
+    padding: 8px;
+  }
+
+  .result-grid {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+  }
+
+  /* 各宮 */
+  .palace-cell {
+    padding: 3px 1px;
+    font-size: 9px;
+    line-height: 1.4;
+    min-width: 0;
+  }
+
+  .twelve-palace {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .main-stars {
+    font-size: 12px;
+  }
+
+  .da-limit {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+
+  .doctor-stars {
+    margin-top: 4px;
+  }
+
+  .calculation-center {
+    padding: 4px;
+    font-size: 10px;
+  }
 }
 
 .ming-palace {
