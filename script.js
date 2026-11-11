@@ -1847,6 +1847,23 @@ console.log(yearStars);
 const yearBranch =
   year_branches[correct_branchs].name;
 
+// 身宮の位置を取得
+const shenIndex = palaceBranches.indexOf(body_branch);
+
+// 出生年の地支を取得
+const BirthYearBranch = year_branches[correct_branchs].name;
+
+// 出生年の地支のインデックス
+const birthYearIndex = year_branches.findIndex(
+  branch => branch.name === BirthYearBranch
+);
+
+// 天寿の配置位置
+const tenjuIndex = (shenIndex + birthYearIndex) % 12;
+
+// 天寿の配置先
+const tenjuBranch = palaceBranches[tenjuIndex];
+
 console.log('生年天干:', yearStem);
 console.log('生年地支:', yearBranch);
 const branchStars =
@@ -2166,7 +2183,7 @@ switch (year_branches[correct_time].name) {
 
 let fireBellGroup;
 // 火星、鈴星の条件分岐
-switch (year_branches[correct_time].name) {
+switch (year_branches[correct_branchs].name) {
   case '寅':
   case '午':
   case '戌':
@@ -2203,27 +2220,58 @@ console.log('==============================');
 const fireBellStars =
   fireBellStarTable[fireBellGroup][year_branches[correct_time].name];
 
+console.log('year_branches[correct_time].name:',year_branches[correct_branchs].name);
 console.log('火星:', fireBellStars['火星']);
 console.log('鈴星:', fireBellStars['鈴星']);
 
-// 日系統の諸星表取得
-let dayStarPositions = {};
 
-// 三台 → 左輔と同じ宮
-dayStarPositions['三台'] = monthStarPositions['左輔'];
+// 起点となる星のインデックス
+const zuofuIndex = palaceBranches.indexOf(monthStarPositions['左輔']);
+const youbiIndex = palaceBranches.indexOf(monthStarPositions['右弼']);
 
-// 八座 → 右弼と同じ宮
-dayStarPositions['八座'] = monthStarPositions['右弼'];
+const bunsyoIndex = palaceBranches.indexOf(hourStarPositions['文昌']);
+const bunkyokuIndex = palaceBranches.indexOf(hourStarPositions['文曲']);
 
-const wenquBranch = hourStarPositions['文曲'];
+// 三台：左輔から時計回り
+const santaiIndex = (zuofuIndex + lunarDay - 1) % 12;
 
-const wenquIndex = palaceBranches.indexOf(wenquBranch);
-const tenguiIndex = (wenquIndex - 1 + 12) % 12;
+// 八座：右弼から反時計回り
+const bazIndex = (youbiIndex - (lunarDay - 1) + 36) % 12;
 
-dayStarPositions['天貴'] = palaceBranches[tenguiIndex];
-console.log('三台 →', dayStarPositions['三台']);
-console.log('八座 →', dayStarPositions['八座']);
-console.log('天貴 →', dayStarPositions['天貴']);
+// 恩光：文昌から時計回りに数えて1宮戻る
+const onkoIndex = (bunsyoIndex + lunarDay - 2 + 12) % 12;
+
+// 天貴：文曲から時計回りに数えて1宮戻る
+const tenkiIndex = (bunkyokuIndex + lunarDay - 2 + 12) % 12;
+
+// 配置先の地支
+const santaiBranch = palaceBranches[santaiIndex];
+const bazBranch = palaceBranches[bazIndex];
+const onkoBranch = palaceBranches[onkoIndex];
+const tenkiBranch = palaceBranches[tenkiIndex];
+
+const additionalStarPositions = {
+  '三台': santaiBranch,
+  '八座': bazBranch,
+  '恩光': onkoBranch,
+  '天貴': tenkiBranch,
+  '天寿': tenjuBranch
+};
+// 八座のデバッグ
+console.log('--- 八座 DEBUG ---');
+console.log('旧暦の日付:', lunarDay);
+console.log('右弼の位置:', monthStarPositions['右弼']);
+console.log('右弼Index:', youbiIndex);
+console.log('八座Index:', bazIndex);
+console.log('八座の配置先:', bazBranch);
+
+// 天貴のデバッグ
+console.log('--- 天貴 DEBUG ---');
+console.log('旧暦の日付:', lunarDay);
+console.log('文曲の位置:', hourStarPositions['文曲']);
+console.log('文曲Index:', bunkyokuIndex);
+console.log('天貴Index:', tenkiIndex);
+console.log('天貴の配置先:', tenkiBranch);
 
 
 // 長生十二神の表取得
@@ -2601,10 +2649,10 @@ const fireBellStarsInPalace = Object.entries(fireBellStars)
   .filter(([starName, branch]) => branch === palaceName)
   .map(([starName]) => starName);
 
-// この宮に入る日系統の星を取得
-const dayStarsInPalace = Object.entries(dayStarPositions)
+// 三台・八座・恩光・天貴
+const additionalStarsInPalace = Object.entries(additionalStarPositions)
   .filter(([starName, branch]) => branch === palaceName)
-  .map(([starName]) => starName);  
+  .map(([starName]) => starName); 
 
 // この宮に入る長生十二神を取得
 const changshengStarsInPalace = Object.entries(changshengPositions)
@@ -2671,9 +2719,9 @@ ${mainStarsInPalace.length > 0 ? `
       ${fireBellStarsInPalace.join('<br>')}
     </div>
 
-    <div class="day-stars">
-      ${dayStarsInPalace.join('<br>')}
-    </div>    
+    <div class="additional-stars">
+      ${additionalStarsInPalace.join('<br>')}
+    </div>
 
 
 
