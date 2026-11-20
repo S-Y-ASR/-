@@ -515,7 +515,31 @@ body {
 
 /* ===== レスポンシブ ===== */
 /* ===== スマホ版のみ ===== */
+/* ===== スマホ版のみ ===== */
 @media screen and (max-width: 768px) {
+
+  /* ヒーロー部分 */
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* 画像の親要素 */
+  .mandala-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* 画像 */
+  .circlestar {
+    width: 90vw;
+    max-width: 400px;
+    height: auto;
+    margin-left: 0;
+    transform: none;
+  }
 
   /* 命盤を横スクロール可能にする */
   .result {
@@ -546,12 +570,7 @@ body {
   .calculation-center {
     padding: 10px;
   }
-
-  .mandala-wrap img {
-    transform: translateX(20px);
-  }
 }
-
 
 .ming-palace {
   background-color: #fff3f7;
