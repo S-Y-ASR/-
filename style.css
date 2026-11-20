@@ -546,6 +546,10 @@ body {
   .calculation-center {
     padding: 10px;
   }
+
+  .mandala-wrap img {
+    transform: translateX(20px);
+  }
 }
 
 
@@ -588,16 +592,16 @@ body {
 }
 
 .da-limit {
-  margin-top: 10px;
+  margin-top: 6px;
   font-size: 16px;
 }
 
 .twelve-palace {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   font-size: 18px;
 }
 
 .doctor-stars {
-  margin-top: 10px;
+  margin-top: 6px;
   color:orange;
 }
